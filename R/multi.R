@@ -16,8 +16,8 @@
 #' @seealso [multiServer()], [dynMultiServer()]
 #'
 #' @export
-multiUI <- function(id, label = "", choices = NULL, selected = NULL, options = NULL,
-                    width = NULL, choiceNames = NULL, choiceValues = NULL) {
+multiUI <- function(id, label = "", choices = character(0),
+                    selected = character(0), options = NULL, width = NULL) {
   ns <- NS(id)
   tagList(
     shinyWidgets::multiInput(
@@ -26,9 +26,7 @@ multiUI <- function(id, label = "", choices = NULL, selected = NULL, options = N
       choices = choices,
       selected = selected,
       options = options,
-      width = width,
-      choiceNames = choiceNames,
-      choiceValues = choiceValues
+      width = width
     )
   )
 }
@@ -46,7 +44,7 @@ multiUI <- function(id, label = "", choices = NULL, selected = NULL, options = N
 #' @seealso [multiUI()]
 #'
 #' @export
-multiServer <- function(id, choices = NULL, selected = NULL) {
+multiServer <- function(id, choices = character(0), selected = character(0)) {
   moduleServer(
     id,
     function(input, output, session) {
