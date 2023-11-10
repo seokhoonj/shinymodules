@@ -44,11 +44,12 @@ loadServer <- function(id, filename, loadfun = "readRDS") {
     function(input, output, session) {
       ns <- session$ns
       data <- eventReactive(input$load, {
-        showId <- showNotification("Reading data...", duration = NULL, closeButton = FALSE)
+        showId <- showNotification("Reading data...", duration = NULL,
+                                   closeButton = FALSE)
         on.exit(removeNotification(showId), add = TRUE)
         stime <- as.numeric(Sys.time())
         f <- match.fun(loadfun)
-        data <- f(sprintf("%s", file()))
+        data <- f(sprintf("%s", filename()))
         etime <- as.numeric(Sys.time())
         lubridate::seconds_to_period(etime - stime)
         data
