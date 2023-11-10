@@ -49,7 +49,7 @@ loadServer <- function(id, filename, loadfun = "readRDS") {
         on.exit(removeNotification(showId), add = TRUE)
         stime <- as.numeric(Sys.time())
         f <- match.fun(loadfun)
-        data <- f(sprintf("%s", filename()))
+        data <- f(sprintf("%s", filename))
         etime <- as.numeric(Sys.time())
         lubridate::seconds_to_period(etime - stime)
         data
