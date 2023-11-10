@@ -4,13 +4,7 @@
 \alias{showModalUI}
 \title{Show Modal Action Button UI}
 \usage{
-showModalUI(
-  id,
-  label = "",
-  icon = icon("search", class = "opt"),
-  width = NULL,
-  ...
-)
+showModalUI(id, label = "", icon = NULL, width = NULL, ...)
 }
 \arguments{
 \item{id}{The input slot that will be used to access the value.}

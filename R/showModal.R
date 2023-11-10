@@ -6,19 +6,20 @@
 #' @param label Display label for the control, or `NULL` for no label.
 #' @param icon An optional [icon()] to appear on the button.
 #' @param width The width of the input, e.g. `400px`, or `100%`; see [validateCssUnit()].
+#' @param ... Named attributes to be applied to the button or link.
 #'
 #' @return A show modal action button UI
 #'
 #' @seealso [showModalServer()]
 #'
 #' @export
-showModalUI <- function(id, label = "", icon = icon("search", class = "opt"),
-                        width = NULL) {
+showModalUI <- function(id, label = "", icon = NULL, width = NULL, ...) {
   ns <- NS(id)
+  if (missing(icon)) icon <- shiny::icon("search", class = "opt")
   tagList(
     actionButton(
       ns("showModalAction"),
-      label = label, icon = icon, width = width
+      label = label, icon = icon, width = width, ...
     )
   )
 }
@@ -67,29 +68,6 @@ showModalServer <- function(id, ...,
           size = size,
           easyClose = easyClose,
           fade = fade
-        ))
-      })
-    }
-  )
-}
-
-showModalServer <- function(id, ..., title = NULL,
-                            size = c("m", "s", "l", "xl")) {
-  size <- match.arg(size)
-  moduleServer(
-    id,
-    function(input, output, session) {
-      showModalAction <- reactive({
-        validate(need(input$showModalAction, message = FALSE))
-        input$showModalAction
-      })
-      observeEvent(showModalAction(), {
-        showModal(modalDialog(
-          ...,
-          title = title,
-          size = size,
-          easyClose = TRUE,
-          footer = NULL
         ))
       })
     }
