@@ -8,8 +8,6 @@
 #' @param selected The initially selected value.
 #' @param options List of options passed to multi (enable_search = FALSE for disabling the search bar for example).
 #' @param width width The width of the input, e.g. `400px`, or `100%`.
-#' @param choiceNames List of names to display to the user.
-#' @param choiceValues List of values corresponding to choiceNames.
 #'
 #' @return A multiselect control UI.
 #'

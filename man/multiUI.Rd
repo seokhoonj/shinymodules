@@ -7,12 +7,10 @@
 multiUI(
   id,
   label = "",
-  choices = NULL,
-  selected = NULL,
+  choices = character(0),
+  selected = character(0),
   options = NULL,
-  width = NULL,
-  choiceNames = NULL,
-  choiceValues = NULL
+  width = NULL
 )
 }
 \arguments{
@@ -27,10 +25,6 @@ multiUI(
 \item{options}{List of options passed to multi (enable_search = FALSE for disabling the search bar for example).}
 
 \item{width}{width The width of the input, e.g. \verb{400px}, or \verb{100\%}.}
-
-\item{choiceNames}{List of names to display to the user.}
-
-\item{choiceValues}{List of values corresponding to choiceNames.}
 }
 \value{
 A multiselect control UI.

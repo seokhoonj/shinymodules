@@ -4,7 +4,7 @@
 \alias{multiServer}
 \title{Multiselect Control Server}
 \usage{
-multiServer(id, choices = NULL, selected = NULL)
+multiServer(id, choices = character(0), selected = character(0))
 }
 \arguments{
 \item{id}{An ID string that corresponds with the ID used to call the module's UI function.}
