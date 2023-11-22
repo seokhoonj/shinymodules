@@ -37,8 +37,8 @@ sliderPeriodUI <- function(id, label = "Period") {
 #' @export
 sliderPeriodServer <- function(
     id, choices,
-    fun = function(x) format(x, "%y.%m"),
-    invfun = function(x) as.Date(paste0(x, ".01"), "%y.%m.%d"),
+    fun = function(x) format(x, "%y-%m"),
+    invfun = function(x) as.Date(paste0(x, "-01"), "%y-%m-%d"),
     selected = NULL, reverse = FALSE
   ) {
   moduleServer(
@@ -89,8 +89,8 @@ sliderPeriodServer <- function(
 #' @export
 dynSliderPeriodServer <- function(
     id, data, column, selected = NULL, reverse = FALSE,
-    fun = function(x) format(x, "%y.%m"),
-    invfun = function(x) as.Date(paste0(x, ".01"), "%y.%m.%d")
+    fun = function(x) format(x, "%y-%m"),
+    invfun = function(x) as.Date(paste0(x, "-01"), "%y-%m-%d")
   ) {
   moduleServer(
     id,
