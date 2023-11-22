@@ -10,8 +10,8 @@ dynSliderPeriodServer(
   column,
   selected = NULL,
   reverse = FALSE,
-  fun = function(x) format(x, "\%y.\%m"),
-  invfun = function(x) as.Date(paste0(x, ".01"), "\%y.\%m.\%d")
+  fun = function(x) format(x, "\%y-\%m"),
+  invfun = function(x) as.Date(paste0(x, "-01"), "\%y-\%m-\%d")
 )
 }
 \arguments{

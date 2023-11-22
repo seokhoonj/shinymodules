@@ -7,8 +7,8 @@
 sliderPeriodServer(
   id,
   choices,
-  fun = function(x) format(x, "\%y.\%m"),
-  invfun = function(x) as.Date(paste0(x, ".01"), "\%y.\%m.\%d"),
+  fun = function(x) format(x, "\%y-\%m"),
+  invfun = function(x) as.Date(paste0(x, "-01"), "\%y-\%m-\%d"),
   selected = NULL,
   reverse = FALSE
 )
