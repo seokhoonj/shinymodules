@@ -17,4 +17,4 @@ Imports:
     shinyWidgets (>= 0.7.6),
     writexl (>= 1.4.2)
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
