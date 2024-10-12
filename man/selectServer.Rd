@@ -4,7 +4,7 @@
 \alias{selectServer}
 \title{Select Input Control Server}
 \usage{
-selectServer(id, choices, selected = NULL)
+selectServer(id, choices, selected = NULL, selectize = FALSE)
 }
 \arguments{
 \item{id}{An ID string that corresponds with the ID used to call the module's UI function.}
@@ -12,6 +12,8 @@ selectServer(id, choices, selected = NULL)
 \item{choices}{Default NULL, list of values to select from.}
 
 \item{selected}{Default NULL, the initially selected value.}
+
+\item{selectize}{Whether to use \emph{selectize.js} or not.}
 }
 \value{
 A select input control server

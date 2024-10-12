@@ -9,7 +9,8 @@ selectUI(
   label = "Select",
   choices = NULL,
   selected = NULL,
-  multiple = FALSE
+  multiple = FALSE,
+  selectize = FALSE
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ selectUI(
 \item{selected}{Default NULL, the initially selected value.}
 
 \item{multiple}{Is selection of multiple items allowed?}
+
+\item{selectize}{Whether to use \emph{selectize.js} or not.}
 }
 \value{
 A select input control UI

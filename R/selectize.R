@@ -8,7 +8,7 @@
 #' @param selected Default NULL, the initially selected value.
 #' @param multiple Is selection of multiple items allowed?
 #' @param options A list of options. See the documentation of
-#' **selectize.js**([https://selectize.dev/docs/usage]) for possible options
+#' *selectize.js*([https://selectize.dev/docs/usage]) for possible options
 #'
 #' @return A selectize input control UI
 #'

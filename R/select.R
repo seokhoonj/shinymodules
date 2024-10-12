@@ -7,6 +7,7 @@
 #' @param choices Default NULL, list of values to select from.
 #' @param selected Default NULL, the initially selected value.
 #' @param multiple Is selection of multiple items allowed?
+#' @param selectize Whether to use *selectize.js* or not.
 #'
 #' @return A select input control UI
 #'
@@ -14,12 +15,12 @@
 #'
 #' @export
 selectUI <- function(id, label = "Select", choices = NULL, selected = NULL,
-                     multiple = FALSE) {
+                     multiple = FALSE, selectize = FALSE) {
   ns <- NS(id)
   tagList(
     selectInput(
       ns("select"), label = label, choices = choices, selected = selected,
-      multiple = multiple
+      multiple = multiple, selectize = selectize
     )
   )
 }
@@ -31,13 +32,14 @@ selectUI <- function(id, label = "Select", choices = NULL, selected = NULL,
 #' @param id An ID string that corresponds with the ID used to call the module's UI function.
 #' @param choices Default NULL, list of values to select from.
 #' @param selected Default NULL, the initially selected value.
+#' @param selectize Whether to use *selectize.js* or not.
 #'
 #' @return A select input control server
 #'
 #' @seealso [selectUI()]
 #'
 #' @export
-selectServer <- function(id, choices, selected = NULL) {
+selectServer <- function(id, choices, selected = NULL, selectize = FALSE) {
   moduleServer(
     id,
     function(input, output, session) {
@@ -46,7 +48,8 @@ selectServer <- function(id, choices, selected = NULL) {
         session,
         inputId = "select",
         choices = choices,
-        selected = selected
+        selected = selected,
+        selectize = selectize
       )
       select <- reactive({
         validate(need(input$select, message = FALSE))
@@ -66,13 +69,15 @@ selectServer <- function(id, choices, selected = NULL) {
 #' @param column A data column for unique list of values.
 #' @param selected The initially selected value.
 #' @param reverse A boolean value whether to reverse the choices or not
+#' @param selectize Whether to use *selectize.js* or not.
 #'
 #' @return The return value, if any, from executing the module server function
 #'
 #' @seealso [selectUI()]
 #'
 #' @export
-dynSelectServer <- function(id, data, column, selected = NULL, reverse = FALSE) {
+dynSelectServer <- function(id, data, column, selected = NULL, reverse = FALSE,
+                            selectize = FALSE) {
   moduleServer(
     id,
     function(input, output, session) {
@@ -86,7 +91,8 @@ dynSelectServer <- function(id, data, column, selected = NULL, reverse = FALSE) 
           session,
           inputId = "select",
           choices = choices,
-          selected = selected
+          selected = selected,
+          selectize = selectize
         )
       })
       select <- reactive({

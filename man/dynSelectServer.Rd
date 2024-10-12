@@ -4,7 +4,14 @@
 \alias{dynSelectServer}
 \title{Dynamic Select Input Control Server}
 \usage{
-dynSelectServer(id, data, column, selected = NULL, reverse = FALSE)
+dynSelectServer(
+  id,
+  data,
+  column,
+  selected = NULL,
+  reverse = FALSE,
+  selectize = FALSE
+)
 }
 \arguments{
 \item{id}{An ID string that corresponds with the ID used to call the module's UI function.}
@@ -16,6 +23,8 @@ dynSelectServer(id, data, column, selected = NULL, reverse = FALSE)
 \item{selected}{The initially selected value.}
 
 \item{reverse}{A boolean value whether to reverse the choices or not}
+
+\item{selectize}{Whether to use \emph{selectize.js} or not.}
 }
 \value{
 The return value, if any, from executing the module server function
