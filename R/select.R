@@ -90,8 +90,7 @@ dynSelectServer <- function(id, data, column, selected = NULL, reverse = FALSE,
           session,
           inputId = "select",
           choices = choices,
-          selected = selected,
-          selectize = selectize
+          selected = selected
         )
       })
       select <- reactive({
