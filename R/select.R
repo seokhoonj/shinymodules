@@ -48,8 +48,7 @@ selectServer <- function(id, choices, selected = NULL, selectize = FALSE) {
         session,
         inputId = "select",
         choices = choices,
-        selected = selected,
-        selectize = selectize
+        selected = selected
       )
       select <- reactive({
         validate(need(input$select, message = FALSE))
