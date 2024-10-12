@@ -7,7 +7,7 @@
 #' @param choices Default NULL, list of values to select from.
 #' @param selected Default NULL, the initially selected value.
 #' @param multiple Is selection of multiple items allowed?
-#' @param selectize Whether to use *selectize.js* or not.
+#' @param selectize Whether to use \pkg{selectize.js} or not.
 #'
 #' @return A select input control UI
 #'
@@ -32,7 +32,7 @@ selectUI <- function(id, label = "Select", choices = NULL, selected = NULL,
 #' @param id An ID string that corresponds with the ID used to call the module's UI function.
 #' @param choices Default NULL, list of values to select from.
 #' @param selected Default NULL, the initially selected value.
-#' @param selectize Whether to use *selectize.js* or not.
+#' @param selectize Whether to use \pkg{selectize.js} or not.
 #'
 #' @return A select input control server
 #'
@@ -68,7 +68,7 @@ selectServer <- function(id, choices, selected = NULL, selectize = FALSE) {
 #' @param column A data column for unique list of values.
 #' @param selected The initially selected value.
 #' @param reverse A boolean value whether to reverse the choices or not
-#' @param selectize Whether to use *selectize.js* or not.
+#' @param selectize Whether to use \pkg{selectize.js} or not.
 #'
 #' @return The return value, if any, from executing the module server function
 #'

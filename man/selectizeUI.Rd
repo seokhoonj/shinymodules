@@ -25,7 +25,7 @@ selectizeUI(
 \item{multiple}{Is selection of multiple items allowed?}
 
 \item{options}{A list of options. See the documentation of
-\emph{selectize.js}(\link{https://selectize.dev/docs/usage}) for possible options}
+\pkg{selectize.js}(\url{https://selectize.dev/docs/usage}) for possible options}
 }
 \value{
 A selectize input control UI

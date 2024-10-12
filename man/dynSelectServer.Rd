@@ -24,7 +24,7 @@ dynSelectServer(
 
 \item{reverse}{A boolean value whether to reverse the choices or not}
 
-\item{selectize}{Whether to use \emph{selectize.js} or not.}
+\item{selectize}{Whether to use \pkg{selectize.js} or not.}
 }
 \value{
 The return value, if any, from executing the module server function

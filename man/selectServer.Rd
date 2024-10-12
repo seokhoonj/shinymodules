@@ -13,7 +13,7 @@ selectServer(id, choices, selected = NULL, selectize = FALSE)
 
 \item{selected}{Default NULL, the initially selected value.}
 
-\item{selectize}{Whether to use \emph{selectize.js} or not.}
+\item{selectize}{Whether to use \pkg{selectize.js} or not.}
 }
 \value{
 A select input control server

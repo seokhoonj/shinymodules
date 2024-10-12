@@ -25,7 +25,7 @@ dynSelectizeServer(
 \item{reverse}{A boolean value whether to reverse the choices or not}
 
 \item{options}{A list of options. See the documentation of
-\strong{selectize.js}(\link{https://selectize.dev/docs/usage}) for possible options}
+\pkg{selectize.js}(\url{https://selectize.dev/docs/usage}) for possible options}
 }
 \value{
 The return value, if any, from executing the module server function

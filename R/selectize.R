@@ -8,7 +8,7 @@
 #' @param selected Default NULL, the initially selected value.
 #' @param multiple Is selection of multiple items allowed?
 #' @param options A list of options. See the documentation of
-#' *selectize.js*([https://selectize.dev/docs/usage]) for possible options
+#' \pkg{selectize.js}(<https://selectize.dev/docs/usage>) for possible options
 #'
 #' @return A selectize input control UI
 #'
@@ -34,7 +34,7 @@ selectizeUI <- function(id, label = "Selectize", choices = NULL, selected = NULL
 #' @param choices Default NULL, list of values to select from.
 #' @param selected Default NULL, the initially selected value.
 #' @param options A list of options. See the documentation of
-#' **selectize.js**([https://selectize.dev/docs/usage]) for possible options
+#' \pkg{selectize.js}(<https://selectize.dev/docs/usage>) for possible options
 #'
 #' @return A selectize input control server
 #'
@@ -72,7 +72,7 @@ selectizeServer <- function(id, choices, selected = NULL, options = NULL) {
 #' @param selected The initially selected value.
 #' @param reverse A boolean value whether to reverse the choices or not
 #' @param options A list of options. See the documentation of
-#' **selectize.js**([https://selectize.dev/docs/usage]) for possible options
+#' \pkg{selectize.js}(<https://selectize.dev/docs/usage>) for possible options
 #'
 #' @return The return value, if any, from executing the module server function
 #'

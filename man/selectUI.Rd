@@ -24,7 +24,7 @@ selectUI(
 
 \item{multiple}{Is selection of multiple items allowed?}
 
-\item{selectize}{Whether to use \emph{selectize.js} or not.}
+\item{selectize}{Whether to use \pkg{selectize.js} or not.}
 }
 \value{
 A select input control UI

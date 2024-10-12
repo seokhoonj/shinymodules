@@ -14,7 +14,7 @@ selectizeServer(id, choices, selected = NULL, options = NULL)
 \item{selected}{Default NULL, the initially selected value.}
 
 \item{options}{A list of options. See the documentation of
-\strong{selectize.js}(\link{https://selectize.dev/docs/usage}) for possible options}
+\pkg{selectize.js}(\url{https://selectize.dev/docs/usage}) for possible options}
 }
 \value{
 A selectize input control server
