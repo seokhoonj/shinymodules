@@ -6,7 +6,7 @@
 \usage{
 selectizeUI(
   id,
-  label = "Selectize",
+  label = "Select",
   choices = NULL,
   selected = NULL,
   multiple = FALSE,

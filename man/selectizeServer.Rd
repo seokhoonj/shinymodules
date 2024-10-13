@@ -4,7 +4,7 @@
 \alias{selectizeServer}
 \title{Selectize Input Control Server}
 \usage{
-selectizeServer(id, choices, selected = NULL, options = NULL)
+selectizeServer(id, choices, selected = NULL, options = NULL, server = FALSE)
 }
 \arguments{
 \item{id}{An ID string that corresponds with the ID used to call the module's UI function.}
@@ -15,6 +15,9 @@ selectizeServer(id, choices, selected = NULL, options = NULL)
 
 \item{options}{A list of options. See the documentation of
 \pkg{selectize.js}(\url{https://selectize.dev/docs/usage}) for possible options}
+
+\item{server}{whether to store choices on the server side, and load the select options dynamically on searching,
+instead of writing all choices into the page at once (i.e., only use the client-side version of \pkg{selectize.js})}
 }
 \value{
 A selectize input control server

@@ -15,12 +15,12 @@
 #' @seealso [selectizeServer()], [dynSelectizeServer()]
 #'
 #' @export
-selectizeUI <- function(id, label = "Selectize", choices = NULL, selected = NULL,
+selectizeUI <- function(id, label = "Select", choices = NULL, selected = NULL,
                         multiple = FALSE, options = NULL) {
   ns <- NS(id)
   tagList(
     selectizeInput(
-      ns("selectize"), label = label, choices = choices, selected = selected,
+      ns("select"), label = label, choices = choices, selected = selected,
       multiple = multiple, options = options
     )
   )
@@ -35,29 +35,33 @@ selectizeUI <- function(id, label = "Selectize", choices = NULL, selected = NULL
 #' @param selected Default NULL, the initially selected value.
 #' @param options A list of options. See the documentation of
 #' \pkg{selectize.js}(<https://selectize.dev/docs/usage>) for possible options
+#' @param server whether to store choices on the server side, and load the select options dynamically on searching,
+#' instead of writing all choices into the page at once (i.e., only use the client-side version of \pkg{selectize.js})
 #'
 #' @return A selectize input control server
 #'
 #' @seealso [selectizeUI()]
 #'
 #' @export
-selectizeServer <- function(id, choices, selected = NULL, options = NULL) {
+selectizeServer <- function(id, choices, selected = NULL, options = NULL,
+                            server = FALSE) {
   moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
       updateSelectizeInput(
         session,
-        inputId = "selectize",
+        inputId = "select",
         choices = choices,
         selected = selected,
-        options = options
+        options = options,
+        server = server
       )
       selectize <- reactive({
-        validate(need(input$selectize, message = FALSE))
-        input$selectize
+        validate(need(input$select, message = FALSE))
+        input$select
       })
-      return(selectize)
+      return(select)
     }
   )
 }
@@ -73,6 +77,8 @@ selectizeServer <- function(id, choices, selected = NULL, options = NULL) {
 #' @param reverse A boolean value whether to reverse the choices or not
 #' @param options A list of options. See the documentation of
 #' \pkg{selectize.js}(<https://selectize.dev/docs/usage>) for possible options
+#' @param server whether to store choices on the server side, and load the select options dynamically on searching,
+#' instead of writing all choices into the page at once (i.e., only use the client-side version of \pkg{selectize.js})
 #'
 #' @return The return value, if any, from executing the module server function
 #'
@@ -80,7 +86,7 @@ selectizeServer <- function(id, choices, selected = NULL, options = NULL) {
 #'
 #' @export
 dynSelectizeServer <- function(id, data, column, selected = NULL, reverse = FALSE,
-                               options = NULL) {
+                               options = NULL, server = FALSE) {
   moduleServer(
     id,
     function(input, output, session) {
@@ -92,18 +98,19 @@ dynSelectizeServer <- function(id, data, column, selected = NULL, reverse = FALS
           choices <- rev(choices)
         updateSelectizeInput(
           session,
-          inputId = "selectize",
+          inputId = "select",
           choices = choices,
           selected = selected,
-          options = options
+          options = options,
+          server = server
         )
       })
       selectize <- reactive({
         # validate(need(data(), message = FALSE)) # it causes a plot refresh
-        validate(need(input$selectize, message = FALSE))
-        input$selectize
+        validate(need(input$select, message = FALSE))
+        input$select
       })
-      return(selectize)
+      return(select)
     }
   )
 }

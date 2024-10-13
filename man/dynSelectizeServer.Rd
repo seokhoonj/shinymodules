@@ -10,7 +10,8 @@ dynSelectizeServer(
   column,
   selected = NULL,
   reverse = FALSE,
-  options = NULL
+  options = NULL,
+  server = FALSE
 )
 }
 \arguments{
@@ -26,6 +27,9 @@ dynSelectizeServer(
 
 \item{options}{A list of options. See the documentation of
 \pkg{selectize.js}(\url{https://selectize.dev/docs/usage}) for possible options}
+
+\item{server}{whether to store choices on the server side, and load the select options dynamically on searching,
+instead of writing all choices into the page at once (i.e., only use the client-side version of \pkg{selectize.js})}
 }
 \value{
 The return value, if any, from executing the module server function
