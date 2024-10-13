@@ -10,7 +10,8 @@ multiUI(
   choices = character(0),
   selected = character(0),
   options = NULL,
-  width = NULL
+  width = NULL,
+  autocomplete = FALSE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ multiUI(
 \item{options}{List of options passed to multi (enable_search = FALSE for disabling the search bar for example).}
 
 \item{width}{width The width of the input, e.g. \verb{400px}, or \verb{100\%}.}
+
+\item{autocomplete}{Sets the initial state of the autocomplete property.}
 }
 \value{
 A multiselect control UI.

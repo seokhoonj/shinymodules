@@ -8,6 +8,7 @@
 #' @param selected The initially selected value.
 #' @param options List of options passed to multi (enable_search = FALSE for disabling the search bar for example).
 #' @param width width The width of the input, e.g. `400px`, or `100%`.
+#' @param autocomplete Sets the initial state of the autocomplete property.
 #'
 #' @return A multiselect control UI.
 #'
@@ -15,7 +16,8 @@
 #'
 #' @export
 multiUI <- function(id, label = "", choices = character(0),
-                    selected = character(0), options = NULL, width = NULL) {
+                    selected = character(0), options = NULL, width = NULL,
+                    autocomplete = FALSE) {
   ns <- NS(id)
   tagList(
     shinyWidgets::multiInput(
@@ -24,7 +26,8 @@ multiUI <- function(id, label = "", choices = character(0),
       choices = choices,
       selected = selected,
       options = options,
-      width = width
+      width = width,
+      autocomplete = autocomplete
     )
   )
 }
