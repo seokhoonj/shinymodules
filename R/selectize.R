@@ -57,7 +57,7 @@ selectizeServer <- function(id, choices, selected = NULL, options = NULL,
         options = options,
         server = server
       )
-      selectize <- reactive({
+      select <- reactive({
         validate(need(input$select, message = FALSE))
         input$select
       })
@@ -105,7 +105,7 @@ dynSelectizeServer <- function(id, data, column, selected = NULL, reverse = FALS
           server = server
         )
       })
-      selectize <- reactive({
+      select <- reactive({
         # validate(need(data(), message = FALSE)) # it causes a plot refresh
         validate(need(input$select, message = FALSE))
         input$select
