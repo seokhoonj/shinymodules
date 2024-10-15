@@ -10,7 +10,7 @@ selectUI(
   choices = NULL,
   selected = NULL,
   multiple = FALSE,
-  selectize = FALSE
+  selectize = TRUE
 )
 }
 \arguments{

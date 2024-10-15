@@ -15,7 +15,7 @@
 #'
 #' @export
 selectUI <- function(id, label = "Select", choices = NULL, selected = NULL,
-                     multiple = FALSE, selectize = FALSE) {
+                     multiple = FALSE, selectize = TRUE) {
   ns <- NS(id)
   tagList(
     selectInput(
@@ -39,7 +39,7 @@ selectUI <- function(id, label = "Select", choices = NULL, selected = NULL,
 #' @seealso [selectUI()]
 #'
 #' @export
-selectServer <- function(id, choices, selected = NULL, selectize = FALSE) {
+selectServer <- function(id, choices, selected = NULL, selectize = TRUE) {
   moduleServer(
     id,
     function(input, output, session) {
@@ -76,7 +76,7 @@ selectServer <- function(id, choices, selected = NULL, selectize = FALSE) {
 #'
 #' @export
 dynSelectServer <- function(id, data, column, selected = NULL, reverse = FALSE,
-                            selectize = FALSE) {
+                            selectize = TRUE) {
   moduleServer(
     id,
     function(input, output, session) {

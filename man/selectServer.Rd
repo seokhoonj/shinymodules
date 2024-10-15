@@ -4,7 +4,7 @@
 \alias{selectServer}
 \title{Select Input Control Server}
 \usage{
-selectServer(id, choices, selected = NULL, selectize = FALSE)
+selectServer(id, choices, selected = NULL, selectize = TRUE)
 }
 \arguments{
 \item{id}{An ID string that corresponds with the ID used to call the module's UI function.}

@@ -10,7 +10,7 @@ dynSelectServer(
   column,
   selected = NULL,
   reverse = FALSE,
-  selectize = FALSE
+  selectize = TRUE
 )
 }
 \arguments{
