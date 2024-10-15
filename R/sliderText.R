@@ -13,11 +13,12 @@
 #'
 #' @export
 sliderTextUI <- function(id, label = "Period", choices = c(0, 1),
-                         selected = c(0, 1)) {
+                         selected = c(0, 1), hide_min_max = FALSE) {
   ns <- NS(id)
   tagList(
     shinyWidgets::sliderTextInput(
-      ns("sliderText"), label = label, choices = choices, selected = selected
+      ns("sliderText"), label = label, choices = choices, selected = selected,
+      hide_min_max = hide_min_max
     )
   )
 }

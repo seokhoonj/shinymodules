@@ -4,7 +4,7 @@
 \alias{sliderPeriodUI}
 \title{Slider Period Input Control UI}
 \usage{
-sliderPeriodUI(id, label = "Period")
+sliderPeriodUI(id, label = "Period", choices = c(0, 1), selected = c(0, 1))
 }
 \arguments{
 \item{id}{The input slot that will be used to access the value.}

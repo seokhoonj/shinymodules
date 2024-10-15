@@ -10,11 +10,12 @@
 #' @seealso [sliderPeriodServer()], [dynSliderPeriodServer()]
 #'
 #' @export
-sliderPeriodUI <- function(id, label = "Period") {
+sliderPeriodUI <- function(id, label = "Period", choices = c(0, 1),
+                           selected = c(0, 1)) {
   ns <- NS(id)
   tagList(
     shinyWidgets::sliderTextInput(
-      ns("sliderPeriod"), label = label, choices = c(0, 1), selected = c(0, 1)
+      ns("sliderPeriod"), label = label, choices = choices, selected = selected
     )
   )
 }

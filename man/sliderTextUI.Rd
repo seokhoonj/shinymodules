@@ -4,7 +4,13 @@
 \alias{sliderTextUI}
 \title{Slider Text Input Control UI}
 \usage{
-sliderTextUI(id, label = "Period", choices = c(0, 1), selected = c(0, 1))
+sliderTextUI(
+  id,
+  label = "Period",
+  choices = c(0, 1),
+  selected = c(0, 1),
+  hide_min_max = FALSE
+)
 }
 \arguments{
 \item{id}{The input slot that will be used to access the value.}
