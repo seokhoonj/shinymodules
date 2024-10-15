@@ -38,7 +38,7 @@ sliderTextUI <- function(id, label = "Period", choices = c(0, 1),
 #' @seealso [sliderTextUI()]
 #'
 #' @export
-sliderTextServer <- function(id, choices, selected = NULL, reverse = FALSE) {
+sliderTextServer <- function(id, choices = NULL, selected = NULL, reverse = FALSE) {
   moduleServer(
     id,
     function(input, output, session) {

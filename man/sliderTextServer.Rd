@@ -4,7 +4,7 @@
 \alias{sliderTextServer}
 \title{Slider Text Input Control Server}
 \usage{
-sliderTextServer(id, choices, selected = NULL, reverse = FALSE)
+sliderTextServer(id, choices = NULL, selected = NULL, reverse = FALSE)
 }
 \arguments{
 \item{id}{An ID string that corresponds with the ID used to call the module's UI function.}
