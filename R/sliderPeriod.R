@@ -4,6 +4,9 @@
 #'
 #' @param id The input slot that will be used to access the value.
 #' @param label Display label for the control, or NULL for no label.
+#' @param choices Default c(0, 1), list of values to select from.
+#' @param selected Default C(0, 1), the initially selected value.
+#' @param hide_min_max Hides min and max labels.
 #'
 #' @return A slider period input UI
 #'
@@ -11,11 +14,12 @@
 #'
 #' @export
 sliderPeriodUI <- function(id, label = "Period", choices = c(0, 1),
-                           selected = c(0, 1)) {
+                           selected = c(0, 1), hide_min_max = FALSE) {
   ns <- NS(id)
   tagList(
     shinyWidgets::sliderTextInput(
-      ns("sliderPeriod"), label = label, choices = choices, selected = selected
+      ns("sliderPeriod"), label = label, choices = choices, selected = selected,
+      hide_min_max = hide_min_max
     )
   )
 }

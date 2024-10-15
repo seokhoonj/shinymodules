@@ -6,6 +6,7 @@
 #' @param label Display label for the control, or NULL for no label.
 #' @param choices Default c(0, 1), list of values to select from.
 #' @param selected Default C(0, 1), the initially selected value.
+#' @param hide_min_max Hides min and max labels.
 #'
 #' @return A slider text input UI
 #'
