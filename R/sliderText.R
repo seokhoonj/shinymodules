@@ -50,11 +50,12 @@ sliderTextServer <- function(id, choices, selected = NULL, reverse = FALSE) {
           session,
           inputId = "sliderText",
           choices = choices,
-          selected = if (is.null(selected)) {
-            c(choices[1L], choices[length(choices)])
-          } else {
-            selected
-          }
+          selected = selected
+          # selected = if (is.null(selected)) {
+          #   c(choices[1L], choices[length(choices)])
+          # } else {
+          #   selected
+          # }
         )
       })
       sliderText <- reactive({
@@ -95,11 +96,12 @@ dynSliderTextServer <- function(id, data, column, selected = NULL,
           session,
           inputId = "sliderText",
           choices = choices,
-          selected = if (is.null(selected)) {
-            c(choices[1L], choices[length(choices)])
-          } else {
-            selected
-          }
+          selected = selected
+          # selected = if (is.null(selected)) {
+          #   c(choices[1L], choices[length(choices)])
+          # } else {
+          #   selected
+          # }
         )
       })
       sliderText <- reactive({

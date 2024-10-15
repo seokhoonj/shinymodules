@@ -59,7 +59,8 @@ sliderPeriodServer <- function(
           session,
           inputId = "sliderPeriod",
           choices = choices,
-          selected = if (is.null(selected)) c(min(choices), max(choices)) else selected
+          selected = selected
+          # selected = if (is.null(selected)) c(min(choices), max(choices)) else selected
         )
       })
       sliderPeriod <- reactive({
@@ -111,7 +112,8 @@ dynSliderPeriodServer <- function(
           session,
           inputId = "sliderPeriod",
           choices = choices,
-          selected = if (is.null(selected)) c(min(choices), max(choices)) else selected
+          selected = selected
+          # selected = if (is.null(selected)) c(min(choices), max(choices)) else selected
         )
       })
       sliderPeriod <- reactive({
