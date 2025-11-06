@@ -16,26 +16,26 @@
 #'
 #' @export
 fileUI <- function(id, label = "Files") {
-  ns <- NS(id)
-  tagList(
-    column(4,
-      fileInput(
+  ns <- shiny::NS(id)
+  shiny::tagList(
+    shiny::column(4,
+      shiny::fileInput(
         ns("file"),
         label = label,
         accept = c(".rds", ".csv", ".xlsx", ".xls")
       )
     ),
-    column(4,
-      selectInput(
+    shiny::column(4,
+      shiny::selectInput(
         ns("sheet"),
         label = "Sheet",
         choices = NULL,
         selected = NULL
       )
     ),
-    div(
-      column(2,
-        actionButton(ns("save"), "Save"),
+    shiny::div(
+      shiny::column(2,
+        shiny::actionButton(ns("save"), "Save"),
         align = "left",
         style = "padding-top: 25px;"
       )
@@ -61,31 +61,31 @@ fileUI <- function(id, label = "Files") {
 #'
 #' @export
 fileServer <- function(id) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
 
-      userFile <- eventReactive(input$file, {
+      userFile <- shiny::eventReactive(input$file, {
         input$file
       })
 
-      ext <- eventReactive(userFile(), {
+      ext <- shiny::eventReactive(userFile(), {
         tools::file_ext(userFile()$datapath)
       })
 
-      observeEvent(ext(), {
+      shiny::observeEvent(ext(), {
         choices <- if (ext() %in% c("xlsx", "xls"))
           readxl::excel_sheets(userFile()$datapath) else character(0)
-        updateSelectInput(session = session, inputId = "sheet",
+        shiny::updateSelectInput(session = session, inputId = "sheet",
                           choices = choices)
       })
 
-      sheet <- eventReactive(input$sheet, {
+      sheet <- shiny::eventReactive(input$sheet, {
         input$sheet
       })
 
-      data <- eventReactive(ext(), {
+      data <- shiny::eventReactive(ext(), {
         if (ext() == "rds") {
           as.data.table(readRDS(userFile()$datapath))
         } else if (ext() == "csv") {
@@ -102,7 +102,7 @@ fileServer <- function(id) {
               fileEncoding = "euc-kr"
             )))
         } else if (ext() %in% c("xlsx", "xls")) {
-          validate(need(sheet(), message = FALSE))
+          shiny::validate(shiny::need(sheet(), message = FALSE))
           tryCatch(
             expr = as.data.table(readxl::read_excel(
               userFile()$datapath,
@@ -115,15 +115,15 @@ fileServer <- function(id) {
       })
 
       # Save
-      userSave <- eventReactive(input$save, {
+      userSave <- shiny::eventReactive(input$save, {
         input$save
       })
 
-      observeEvent(userSave(), {
+      shiny::observeEvent(userSave(), {
         if (is.null(input$file)) {
-          showModal(modalDialog(
-            title = h4("Unsaved", align = "center"),
-            h5("You have not uploaded a file", align = "center"),
+          shiny::showModal(shiny::modalDialog(
+            title = shiny::h4("Unsaved", align = "center"),
+            shiny::h5("You have not uploaded a file", align = "center"),
             easyClose = TRUE,
             footer = NULL,
             size = "s"
@@ -141,9 +141,9 @@ fileServer <- function(id) {
               data(), path = sprintf("save/%s", userFile()$name)
             )
           }
-          showModal(modalDialog(
-            title = h4("Saved", align = "center"),
-            h5(sprintf("%s file is saved", userFile()$name), align = "center"),
+          shiny::showModal(shiny::modalDialog(
+            title = shiny::h4("Saved", align = "center"),
+            shiny::h5(sprintf("%s file is saved", userFile()$name), align = "center"),
             easyClose = TRUE,
             footer = NULL,
             size = "s"

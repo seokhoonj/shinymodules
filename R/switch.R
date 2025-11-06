@@ -14,8 +14,8 @@
 #' @export
 switchUI <- function(id, label = "Gender", onLabel = "Split",
                      offLabel = "Merge") {
-  ns <- NS(id)
-  tagList(
+  ns <- shiny::NS(id)
+  shiny::tagList(
     shinyWidgets::switchInput(
       ns("switch"), label = label, onLabel = onLabel, offLabel = offLabel
     )
@@ -34,12 +34,12 @@ switchUI <- function(id, label = "Gender", onLabel = "Split",
 #'
 #' @export
 switchServer <- function(id) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      switch <- eventReactive(input$switch, {
-        # validate(need(input$switch, message = FALSE)) is not working for switchInput
+      switch <- shiny::eventReactive(input$switch, {
+        # shiny::validate(shiny::need(input$switch, message = FALSE)) is not working for switchInput
         input$switch
       })
       return(switch)

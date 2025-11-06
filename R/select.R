@@ -16,9 +16,9 @@
 #' @export
 selectUI <- function(id, label = "Select", choices = NULL, selected = NULL,
                      multiple = FALSE, selectize = TRUE) {
-  ns <- NS(id)
-  tagList(
-    selectInput(
+  ns <- shiny::NS(id)
+  shiny::tagList(
+    shiny::selectInput(
       ns("select"), label = label, choices = choices, selected = selected,
       multiple = multiple, selectize = selectize
     )
@@ -40,18 +40,18 @@ selectUI <- function(id, label = "Select", choices = NULL, selected = NULL,
 #'
 #' @export
 selectServer <- function(id, choices, selected = NULL, selectize = TRUE) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      updateSelectInput(
+      shiny::updateSelectInput(
         session,
         inputId = "select",
         choices = choices,
         selected = selected
       )
-      select <- reactive({
-        validate(need(input$select, message = FALSE))
+      select <- shiny::reactive({
+        shiny::validate(shiny::need(input$select, message = FALSE))
         input$select
       })
       return(select)
@@ -77,25 +77,25 @@ selectServer <- function(id, choices, selected = NULL, selectize = TRUE) {
 #' @export
 dynSelectServer <- function(id, data, column, selected = NULL, reverse = FALSE,
                             selectize = TRUE) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      observeEvent(data(), {
+      shiny::observeEvent(data(), {
         dt <- data()
         choices <- sort(unique(dt[[column]]))
         if (reverse)
           choices <- rev(choices)
-        updateSelectInput(
+        shiny::updateSelectInput(
           session,
           inputId = "select",
           choices = choices,
           selected = selected
         )
       })
-      select <- reactive({
-        # validate(need(data(), message = FALSE)) # it causes a plot refresh
-        validate(need(input$select, message = FALSE))
+      select <- shiny::reactive({
+        # shiny::validate(shiny::need(data(), message = FALSE)) # it causes a plot refresh
+        shiny::validate(shiny::need(input$select, message = FALSE))
         input$select
       })
       return(select)

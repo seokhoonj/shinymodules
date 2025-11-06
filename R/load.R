@@ -15,9 +15,9 @@
 #'
 #' @export
 loadUI <- function(id, label = "Load") {
-  ns <- NS(id)
-  tagList(
-    actionButton(ns("load"), label = label),
+  ns <- shiny::NS(id)
+  shiny::tagList(
+    shiny::actionButton(ns("load"), label = label),
   )
 }
 
@@ -39,14 +39,14 @@ loadUI <- function(id, label = "Load") {
 #'
 #' @export
 loadServer <- function(id, filename, loadfun = "readRDS") {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      data <- eventReactive(input$load, {
-        showId <- showNotification("Reading data...", duration = NULL,
+      data <- shiny::eventReactive(input$load, {
+        showId <- shiny::showNotification("Reading data...", duration = NULL,
                                    closeButton = FALSE)
-        on.exit(removeNotification(showId), add = TRUE)
+        on.exit(shiny::removeNotification(showId), add = TRUE)
         stime <- as.numeric(Sys.time())
         f <- match.fun(loadfun)
         data <- f(sprintf("%s", filename))

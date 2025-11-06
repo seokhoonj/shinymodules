@@ -6,7 +6,7 @@
 #'   downloadDataUI("download_data", label = "download")
 #' }
 #'
-#' @param id The name of the output slot that the downloadHandler is assigned to.
+#' @param id The name of the output slot that the shiny::downloadHandler is assigned to.
 #' @param label The label that should appear on the button.
 #' @param right A boolean specifying right or not.
 #' @param up A boolean specifying up or not.
@@ -19,12 +19,12 @@
 #' @export
 downloadDataUI <- function(id, label, right = FALSE, up = TRUE,
                            animate = TRUE) {
-  ns <- NS(id)
-  tagList(
+  ns <- shiny::NS(id)
+  shiny::tagList(
     shinyWidgets::dropdown(
-      downloadButton(outputId = ns("downloadRds") , label = "rds" ),
-      downloadButton(outputId = ns("downloadCsv") , label = "csv" ),
-      downloadButton(outputId = ns("downloadXlsx"), label = "xlsx"),
+      shiny::downloadButton(outputId = ns("downloadRds") , label = "rds" ),
+      shiny::downloadButton(outputId = ns("downloadCsv") , label = "csv" ),
+      shiny::downloadButton(outputId = ns("downloadXlsx"), label = "xlsx"),
       size = "xs",
       icon = icon("gear", class = "opt"),
       right = right,
@@ -52,11 +52,11 @@ downloadDataUI <- function(id, label, right = FALSE, up = TRUE,
 #'
 #' @export
 downloadDataServer <- function(id, filename, data) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      output$downloadRds <- downloadHandler(
+      output$downloadRds <- shiny::downloadHandler(
         filename = function() {
           sprintf("%s_%s.rds", filename, format(Sys.Date(), "%Y%m%d"))
         },
@@ -64,7 +64,7 @@ downloadDataServer <- function(id, filename, data) {
           saveRDS(data, file = file)
         }
       )
-      output$downloadCsv <- downloadHandler(
+      output$downloadCsv <- shiny::downloadHandler(
         filename = function() {
           sprintf("%s_%s.csv", filename, format(Sys.Date(), "%Y%m%d"))
         },
@@ -72,7 +72,7 @@ downloadDataServer <- function(id, filename, data) {
           data.table::fwrite(data, file = file)
         }
       )
-      output$downloadXlsx <- downloadHandler(
+      output$downloadXlsx <- shiny::downloadHandler(
         filename = function() {
           sprintf("%s_%s.xlsx", filename, format(Sys.Date(), "%Y%m%d"))
         },
@@ -92,7 +92,7 @@ downloadDataServer <- function(id, filename, data) {
 #'   downloadPlotUI("download_plot", label = "download")
 #' }
 #'
-#' @param id The name of the output slot that the downloadHandler is assigned to.
+#' @param id The name of the output slot that the shiny::downloadHandler is assigned to.
 #' @param label The label that should appear on the button.
 #' @param right A boolean specifying right or not.
 #' @param up A boolean specifying up or not.
@@ -105,10 +105,10 @@ downloadDataServer <- function(id, filename, data) {
 #' @export
 downloadPlotUI <- function(id, label, right = FALSE, up = TRUE,
                            animate = TRUE) {
-  ns <- NS(id)
-  tagList(
+  ns <- shiny::NS(id)
+  shiny::tagList(
     shinyWidgets::dropdown(
-      downloadButton(outputId = ns("downloadPlot")),
+      shiny::downloadButton(outputId = ns("downloadPlot")),
       size = "xs",
       icon = icon("gear", class = "opt"),
       right = right,
@@ -136,11 +136,11 @@ downloadPlotUI <- function(id, label, right = FALSE, up = TRUE,
 #'
 #' @export
 downloadPlotServer <- function(id, filename, plot) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      output$downloadPlot <- downloadHandler(
+      output$downloadPlot <- shiny::downloadHandler(
         filename = function() {
           sprintf("%s_%s.png", filename, format(Sys.Date(), "%Y%m%d"))
         },

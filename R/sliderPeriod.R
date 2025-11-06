@@ -15,8 +15,8 @@
 #' @export
 sliderPeriodUI <- function(id, label = "Period", choices = c(0, 1),
                            selected = c(0, 1), hide_min_max = FALSE) {
-  ns <- NS(id)
-  tagList(
+  ns <- shiny::NS(id)
+  shiny::tagList(
     shinyWidgets::sliderTextInput(
       ns("sliderPeriod"), label = label, choices = choices, selected = selected,
       hide_min_max = hide_min_max
@@ -46,11 +46,11 @@ sliderPeriodServer <- function(
     invfun = function(x) as.Date(paste0(x, "-01"), "%y-%m-%d"),
     selected = NULL, reverse = FALSE
   ) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      observe({
+      shiny::observe({
         if (reverse)
           choices <- rev(choices)
         if (!is.null(fun))
@@ -63,8 +63,8 @@ sliderPeriodServer <- function(
           selected = if (is.null(selected)) c(min(choices), max(choices)) else selected
         )
       })
-      sliderPeriod <- reactive({
-        validate(need(input$sliderPeriod, message = FALSE))
+      sliderPeriod <- shiny::reactive({
+        shiny::validate(shiny::need(input$sliderPeriod, message = FALSE))
         if (!is.null(invfun)) {
           invfun(input$sliderPeriod)
         } else {
@@ -98,11 +98,11 @@ dynSliderPeriodServer <- function(
     fun = function(x) format(x, "%y-%m"),
     invfun = function(x) as.Date(paste0(x, "-01"), "%y-%m-%d")
   ) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      observeEvent(data(), {
+      shiny::observeEvent(data(), {
         choices <- sort(unique(data()[[column]]))
         if (reverse)
           choices <- rev(choices)
@@ -116,8 +116,8 @@ dynSliderPeriodServer <- function(
           selected = if (is.null(selected)) c(min(choices), max(choices)) else selected
         )
       })
-      sliderPeriod <- reactive({
-        validate(need(input$sliderPeriod, message = FALSE))
+      sliderPeriod <- shiny::reactive({
+        shiny::validate(shiny::need(input$sliderPeriod, message = FALSE))
         if (!is.null(invfun)) {
           invfun(input$sliderPeriod)
         } else {

@@ -19,9 +19,9 @@
 #' @export
 logScaleUI <- function(id, label = "Log scale", choices = NULL,
                        selected = NULL) {
-  ns <- NS(id)
-  tagList(
-    selectInput(
+  ns <- shiny::NS(id)
+  shiny::tagList(
+    shiny::selectInput(
       inputId = ns("logScale"),
       label = label,
       choices = choices,
@@ -49,20 +49,20 @@ logScaleUI <- function(id, label = "Log scale", choices = NULL,
 #'
 #' @export
 logScaleServer <- function(id, choices = c("force", "log"), selected = NULL) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      observe({
-        updateSelectInput(
+      shiny::observe({
+        shiny::updateSelectInput(
           session,
           inputId = "logScale",
           choices = choices,
           selected = selected
         )
       })
-      logScale <- reactive({
-        validate(need(input$logScale, message = FALSE))
+      logScale <- shiny::reactive({
+        shiny::validate(shiny::need(input$logScale, message = FALSE))
         input$logScale
       })
       return(logScale)

@@ -18,9 +18,9 @@
 #'
 #' @export
 scalesUI <- function(id, label = "Scales", choices = NULL, selected = NULL) {
-  ns <- NS(id)
-  tagList(
-    selectInput(
+  ns <- shiny::NS(id)
+  shiny::tagList(
+    shiny::selectInput(
       ns("scales"), label = label, choices = choices, selected = selected
     )
   )
@@ -46,20 +46,20 @@ scalesUI <- function(id, label = "Scales", choices = NULL, selected = NULL) {
 #' @export
 scalesServer <- function(id, choices = c("fixed", "free_x", "free_y", "free"),
                          selected = NULL) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      observe({
-        updateSelectInput(
+      shiny::observe({
+        shiny::updateSelectInput(
           session,
           inputId = "scales",
           choices = choices,
           selected = selected
         )
       })
-      scales <- reactive({
-        validate(need(input$scales, message = FALSE))
+      scales <- shiny::reactive({
+        shiny::validate(shiny::need(input$scales, message = FALSE))
         input$scales
       })
       return(scales)

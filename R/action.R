@@ -17,9 +17,9 @@
 #'
 #' @export
 actionUI <- function(id, label = "Run") {
-  ns <- NS(id)
-  tagList(
-    actionButton(ns("action"), label = label)
+  ns <- shiny::NS(id)
+  shiny::tagList(
+    shiny::actionButton(ns("action"), label = label)
   )
 }
 
@@ -41,11 +41,11 @@ actionUI <- function(id, label = "Run") {
 #'
 #' @export
 actionServer <- function(id) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      action <- eventReactive(input$action, {
+      action <- shiny::eventReactive(input$action, {
         input$action
       })
       return(action)

@@ -7,7 +7,7 @@
 downloadPlotUI(id, label, right = FALSE, up = TRUE, animate = TRUE)
 }
 \arguments{
-\item{id}{The name of the output slot that the downloadHandler is assigned to.}
+\item{id}{The name of the output slot that the shiny::downloadHandler is assigned to.}
 
 \item{label}{The label that should appear on the button.}
 

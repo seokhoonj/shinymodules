@@ -13,7 +13,7 @@ showModalUI(id, label = "", icon = NULL, width = NULL, ...)
 
 \item{icon}{An optional \code{\link[=icon]{icon()}} to appear on the button.}
 
-\item{width}{The width of the input, e.g. \verb{400px}, or \verb{100\%}; see \code{\link[=validateCssUnit]{validateCssUnit()}}.}
+\item{width}{The width of the input, e.g. \verb{400px}, or \verb{100\%}; see \code{\link[shiny:reexports]{shiny::validateCssUnit()}}.}
 
 \item{...}{Named attributes to be applied to the button or link.}
 }

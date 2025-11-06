@@ -9,9 +9,9 @@ dynSliderTextServer(id, data, column, selected = NULL, reverse = FALSE)
 \arguments{
 \item{id}{An ID string that corresponds with the ID used to call the module's UI function.}
 
-\item{data}{A reactive data}
+\item{data}{A shiny::reactive data}
 
-\item{column}{A data column for unique list of values}
+\item{column}{A data shiny::column for unique list of values}
 
 \item{selected}{The initially selected value.}
 

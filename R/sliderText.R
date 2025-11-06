@@ -15,8 +15,8 @@
 #' @export
 sliderTextUI <- function(id, label = "Period", choices = c(0, 1),
                          selected = c(0, 1), hide_min_max = FALSE) {
-  ns <- NS(id)
-  tagList(
+  ns <- shiny::NS(id)
+  shiny::tagList(
     shinyWidgets::sliderTextInput(
       ns("sliderText"), label = label, choices = choices, selected = selected,
       hide_min_max = hide_min_max
@@ -39,11 +39,11 @@ sliderTextUI <- function(id, label = "Period", choices = c(0, 1),
 #'
 #' @export
 sliderTextServer <- function(id, choices = NULL, selected = NULL, reverse = FALSE) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      observe({
+      shiny::observe({
         if (reverse)
           choices <- rev(choices)
         shinyWidgets::updateSliderTextInput(
@@ -58,8 +58,8 @@ sliderTextServer <- function(id, choices = NULL, selected = NULL, reverse = FALS
           # }
         )
       })
-      sliderText <- reactive({
-        validate(need(input$sliderText, message = FALSE))
+      sliderText <- shiny::reactive({
+        shiny::validate(shiny::need(input$sliderText, message = FALSE))
         input$sliderText
       })
       return(sliderText)
@@ -72,8 +72,8 @@ sliderTextServer <- function(id, choices = NULL, selected = NULL, reverse = FALS
 #' @description Create a dynamic slider text input control server.
 #'
 #' @param id An ID string that corresponds with the ID used to call the module's UI function.
-#' @param data A reactive data
-#' @param column A data column for unique list of values
+#' @param data A shiny::reactive data
+#' @param column A data shiny::column for unique list of values
 #' @param selected The initially selected value.
 #' @param reverse A boolean value whether to reverse the choices or not
 #'
@@ -84,11 +84,11 @@ sliderTextServer <- function(id, choices = NULL, selected = NULL, reverse = FALS
 #' @export
 dynSliderTextServer <- function(id, data, column, selected = NULL,
                                 reverse = FALSE) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      observeEvent(data(), {
+      shiny::observeEvent(data(), {
         choices <- sort(unique(data()[[column]]))
         if (reverse)
           choices <- rev(choices)
@@ -104,8 +104,8 @@ dynSliderTextServer <- function(id, data, column, selected = NULL,
           # }
         )
       })
-      sliderText <- reactive({
-        validate(need(input$sliderText, message = FALSE))
+      sliderText <- shiny::reactive({
+        shiny::validate(shiny::need(input$sliderText, message = FALSE))
         input$sliderText
       })
       return(sliderText)

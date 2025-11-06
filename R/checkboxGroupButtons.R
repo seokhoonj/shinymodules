@@ -27,8 +27,8 @@
 checkboxGroupButtonsUI <- function(id, label = "", status = "primary",
                                    choices = as.character(0),
                                    selected = as.character(0)) {
-  ns <- NS(id)
-  tagList(
+  ns <- shiny::NS(id)
+  shiny::tagList(
     shinyWidgets::checkboxGroupButtons(
       inputId = ns("checkboxGroupButtons"),
       label = label,
@@ -70,11 +70,11 @@ checkboxGroupButtonsUI <- function(id, label = "", status = "primary",
 #' @export
 checkboxGroupButtonsServer <- function(id, status = "primary", choices,
                                        selected = NULL) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      observe({
+      shiny::observe({
         shinyWidgets::updateCheckboxGroupButtons(
           session,
           inputId = "checkboxGroupButtons",
@@ -87,8 +87,8 @@ checkboxGroupButtonsServer <- function(id, status = "primary", choices,
           )
         )
       })
-      checkboxGroupButtons <- reactive({
-        validate(need(input$checkboxGroupButtons, message = FALSE))
+      checkboxGroupButtons <- shiny::reactive({
+        shiny::validate(shiny::need(input$checkboxGroupButtons, message = FALSE))
         input$checkboxGroupButtons
       })
       return(checkboxGroupButtons)

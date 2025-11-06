@@ -15,8 +15,8 @@
 #'
 #' @export
 numericUI <- function(id, label = "", value = 0, min = 0, max = 1, step = 1) {
-  ns <- NS(id)
-  numericInput(
+  ns <- shiny::NS(id)
+  shiny::numericInput(
     ns("numeric"), label = label, value = value, min = min, max = max, step = 1
   )
 }
@@ -37,22 +37,22 @@ numericUI <- function(id, label = "", value = 0, min = 0, max = 1, step = 1) {
 #'
 #' @export
 numericServer <- function(id, value = 0, min = 0, max = 1, step = 1) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      observe({
-        updateNumericInput(
+      shiny::observe({
+        shiny::updateNumericInput(
           session = session,
           inputId = "numeric",
-          value = value,
-          min = min,
-          max = max,
-          step = step
+          value   = value,
+          min     = min,
+          max     = max,
+          step    = step
         )
       })
-      numeric <- reactive({
-        validate(need(input$numeric, message = FALSE))
+      numeric <- shiny::reactive({
+        shiny::validate(shiny::need(input$numeric, message = FALSE))
         input$numeric
       })
       return(numeric)
@@ -75,24 +75,24 @@ numericServer <- function(id, value = 0, min = 0, max = 1, step = 1) {
 #'
 #' @export
 dynNumericServer <- function(id, data, column, value = 0) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      observeEvent(data(), {
+      shiny::observeEvent(data(), {
         column_range <- unique(data()[[column]])
         col_min <- min(column_range, na.rm = TRUE)
         col_max <- max(column_range, na.rm = TRUE)
-        updateNumericInput(
+        shiny::updateNumericInput(
           session,
           inputId = "numeric",
-          value = value,
-          min = col_min,
-          max = col_max
+          value   = value,
+          min     = col_min,
+          max     = col_max
         )
       })
-      numeric <- reactive({
-        validate(need(input$numeric, message = FALSE))
+      numeric <- shiny::reactive({
+        shiny::validate(shiny::need(input$numeric, message = FALSE))
         input$numeric
       })
       return(numeric)

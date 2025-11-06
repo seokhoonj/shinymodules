@@ -8,7 +8,7 @@ showModalServer(
   id,
   ...,
   title = NULL,
-  footer = modalButton("Dismiss"),
+  footer = shiny::modalButton("Dismiss"),
   size = c("m", "s", "l", "xl"),
   easyClose = FALSE,
   fade = TRUE
@@ -28,7 +28,7 @@ showModalServer(
 \item{easyClose}{If \code{TRUE}, the modal dialog can be dismissed by clicking outside
 the dialog box, or be pressing the Escape key. If \code{FALSE} (the default),
 the modal dialog can't be dismissed in those ways; instead it must be
-dismissed by clicking on a \code{modalButton()}, or from a call to \code{\link[=removeModal]{removeModal()}}
+dismissed by clicking on a \code{shiny::modalButton()}, or from a call to \code{\link[=removeModal]{removeModal()}}
 on the server.}
 
 \item{fade}{If \code{FALSE}, the modal dialog will have no fade-in animation

@@ -23,14 +23,14 @@
 checkboxGroupUI <- function(id, label = NULL, choices = character(0),
                             selected = character(0), value = FALSE,
                             inline = FALSE) {
-  ns <- NS(id)
-  tagList(
-    checkboxGroupInput(
+  ns <- shiny::NS(id)
+  shiny::tagList(
+    shiny::checkboxGroupInput(
       ns("checkboxGroup"), label, choices = choices, selected = selected,
       inline = inline
     ),
-    div(
-      checkboxInput(ns("checkbox"), label = "All/None", value = value),
+    shiny::div(
+      shiny::checkboxInput(ns("checkbox"), label = "All/None", value = value),
       style = "color: #FB8072"
     )
   )
@@ -57,22 +57,22 @@ checkboxGroupUI <- function(id, label = NULL, choices = character(0),
 #'
 #' @export
 checkboxGroupServer <- function(id, choices, selected = NULL, reverse = FALSE) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      observe({
+      shiny::observe({
         if (reverse)
           choices <- rev(choices)
-        updateCheckboxGroupInput(
+        shiny::updateCheckboxGroupInput(
           session,
           inputId = "checkboxGroup",
           choices = choices,
           selected = if (input$checkbox) choices else selected
         )
       })
-      checkboxGroup <- reactive({
-        validate(need(input$checkboxGroup, message = FALSE))
+      checkboxGroup <- shiny::reactive({
+        shiny::validate(shiny::need(input$checkboxGroup, message = FALSE))
         input$checkboxGroup
       })
       return(checkboxGroup)
@@ -87,12 +87,12 @@ checkboxGroupServer <- function(id, choices, selected = NULL, reverse = FALSE) {
 #' @details
 #' \preformatted{
 #' ## Example
-#' dynCheckboxGroupServer("checkboxgroup", data, column, selected, reverse = FALSE)
+#' dynCheckboxGroupServer("checkboxgroup", data, shiny::column, selected, reverse = FALSE)
 #' }
 #'
 #' @param id An ID string that corresponds with the ID used to call the module's UI function.
-#' @param data A reactive data
-#' @param column A data column for unique list of values
+#' @param data A shiny::reactive data
+#' @param column A data shiny::column for unique list of values
 #' @param selected The initially selected value.
 #' @param reverse A boolean value whether to reverse the choices or not
 #'
@@ -103,24 +103,24 @@ checkboxGroupServer <- function(id, choices, selected = NULL, reverse = FALSE) {
 #' @export
 dynCheckboxGroupServer <- function(id, data, column, selected = NULL,
                                    reverse = FALSE) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      observeEvent({data(); input$checkbox}, {
+      shiny::observeEvent({data(); input$checkbox}, {
         choices <- sort(unique(data()[[column]]))
         if (reverse)
           choices <- rev(choices)
-        updateCheckboxGroupInput(
+        shiny::updateCheckboxGroupInput(
           session,
           inputId = "checkboxGroup",
           choices = choices,
           selected = if (input$checkbox) choices else selected
         )
       })
-      checkboxGroup <- reactive({
-        # validate(need(data(), message = FALSE)) # it causes a plot refresh
-        validate(need(input$checkboxGroup, message = FALSE))
+      checkboxGroup <- shiny::reactive({
+        # shiny::validate(shiny::need(data(), message = FALSE)) # it causes a plot refresh
+        shiny::validate(shiny::need(input$checkboxGroup, message = FALSE))
         input$checkboxGroup
       })
       return(checkboxGroup)

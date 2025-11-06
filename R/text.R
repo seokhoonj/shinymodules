@@ -13,9 +13,9 @@
 #'
 #' @export
 textUI <- function(id, label = "", value = "") {
-  ns <- NS(id)
-  tagList(
-    textInput(ns("text"), label = label, value = value)
+  ns <- shiny::NS(id)
+  shiny::tagList(
+    shiny::textInput(ns("text"), label = label, value = value)
   )
 }
 
@@ -32,11 +32,11 @@ textUI <- function(id, label = "", value = "") {
 #'
 #' @export
 textServer <- function(id) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
-      text <- reactive({
-        validate(need(input$text, message = FALSE))
+      text <- shiny::reactive({
+        shiny::validate(shiny::need(input$text, message = FALSE))
         input$text
       })
       return(text)

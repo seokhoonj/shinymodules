@@ -17,9 +17,9 @@
 #' @export
 dateUI <- function(id, label = "Date", value = Sys.Date(),
                    format = "yyyy-mm-dd") {
-  ns <- NS(id)
-  tagList(
-    dateInput(ns("date"), label = label, value = value, format = format)
+  ns <- shiny::NS(id)
+  shiny::tagList(
+    shiny::dateInput(ns("date"), label = label, value = value, format = format)
   )
 }
 
@@ -40,12 +40,12 @@ dateUI <- function(id, label = "Date", value = Sys.Date(),
 #'
 #' @export
 dateServer <- function(id) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      date <- reactive({
-        validate(need(input$date, message = FALSE))
+      date <- shiny::reactive({
+        shiny::validate(shiny::need(input$date, message = FALSE))
         as.Date(input$date)
       })
       return(date)

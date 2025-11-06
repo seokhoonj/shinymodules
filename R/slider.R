@@ -54,24 +54,24 @@ sliderUI <- function(id, label = "", min = 0, max = 1, value = c(0, 1),
                      step = NULL, round = FALSE, ticks = FALSE, animate = FALSE,
                      sep = ",", pre = NULL, post = NULL, timeFormat = NULL,
                      timezone = NULL, dragRange = TRUE) {
-  ns <- NS(id)
-  tagList(
-    sliderInput(
+  ns <- shiny::NS(id)
+  shiny::tagList(
+    shiny::sliderInput(
       ns("slider"),
-      label = label,
-      min = min,
-      max = max,
-      value = value,
-      step = step,
-      round = round,
-      ticks = ticks,
-      animate = animate,
-      sep = sep,
-      pre = pre,
-      post = post,
+      label      = label,
+      min        = min,
+      max        = max,
+      value      = value,
+      step       = step,
+      round      = round,
+      ticks      = ticks,
+      animate    = animate,
+      sep        = sep,
+      pre        = pre,
+      post       = post,
       timeFormat = timeFormat,
-      timezone = timezone,
-      dragRange = dragRange
+      timezone   = timezone,
+      dragRange  = dragRange
     )
   )
 }
@@ -99,22 +99,22 @@ sliderUI <- function(id, label = "", min = 0, max = 1, value = c(0, 1),
 #' @export
 sliderServer <- function(id, min = NULL, max = NULL, value = NULL,
                          step = NULL) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      observe({
-        updateSliderInput(
+      shiny::observe({
+        shiny::updateSliderInput(
           session,
           inputId = "slider",
-          min = min,
-          max = max,
-          value = value,
-          step = step
+          min     = min,
+          max     = max,
+          value   = value,
+          step    = step
         )
       })
-      slider <- reactive({
-        validate(need(input$slider, message = FALSE))
+      slider <- shiny::reactive({
+        shiny::validate(shiny::need(input$slider, message = FALSE))
         input$slider
       })
       return(slider)
@@ -140,14 +140,14 @@ sliderServer <- function(id, min = NULL, max = NULL, value = NULL,
 #'
 #' @export
 dynSliderServer <- function(id, data, column, value = NULL) {
-  moduleServer(
+  shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      observe({
-        validate(need(data(), message = FALSE))
+      shiny::observe({
+        shiny::validate(shiny::need(data(), message = FALSE))
         column_range <- range(data()[[column]], na.rm = TRUE)
-        updateSliderInput(
+        shiny::updateSliderInput(
           session,
           inputId = "slider",
           min = min(column_range),
@@ -155,8 +155,8 @@ dynSliderServer <- function(id, data, column, value = NULL) {
           value = if (is.null(value)) column_range else value
         )
       })
-      slider <- reactive({
-        validate(need(input$slider, message = FALSE))
+      slider <- shiny::reactive({
+        shiny::validate(shiny::need(input$slider, message = FALSE))
         input$slider
       })
       return(slider)
