@@ -50,6 +50,7 @@ sliderPeriodServer <- function(
     id,
     function(input, output, session) {
       ns <- session$ns
+
       shiny::observe({
         if (reverse)
           choices <- rev(choices)
@@ -63,6 +64,7 @@ sliderPeriodServer <- function(
           selected = if (is.null(selected)) c(min(choices), max(choices)) else selected
         )
       })
+
       sliderPeriod <- shiny::reactive({
         shiny::validate(shiny::need(input$sliderPeriod, message = FALSE))
         if (!is.null(invfun)) {
@@ -71,7 +73,8 @@ sliderPeriodServer <- function(
           input$sliderPeriod
         }
       })
-      return(sliderPeriod)
+
+      sliderPeriod
     }
   )
 }
@@ -97,34 +100,83 @@ dynSliderPeriodServer <- function(
     id, data, column, selected = NULL, reverse = FALSE,
     fun = function(x) format(x, "%y-%m"),
     invfun = function(x) as.Date(paste0(x, "-01"), "%y-%m-%d")
-  ) {
+) {
   shiny::moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
+
+      # ------------------------------------------------------------------------------
+      # Update slider choices and selected range whenever 'data()' changes
+      # ------------------------------------------------------------------------------
       shiny::observeEvent(data(), {
-        choices <- sort(unique(data()[[column]]))
+        dt <- data()
+
+        # Ensure valid data
+        if (is.null(dt) || !nrow(dt))
+          return(NULL)
+
+        # Extract unique values from the specified column
+        vals <- sort(unique(dt[[column]]))
+        if (!length(vals))
+          return(NULL)
+
+        # Reverse order if requested
         if (reverse)
-          choices <- rev(choices)
-        if (!is.null(fun))
-          choices <- fun(choices)
+          vals <- rev(vals)
+
+        # Apply user-provided formatting function
+        choices <- if (!is.null(fun)) fun(vals) else vals
+
+        # Current selected values already shown in the slider
+        current <- shiny::isolate(input$sliderPeriod)
+
+        # Determine what selection should be applied
+        selected_choices <- NULL
+
+        if (
+          !is.null(current) &&
+          length(current) == 2L &&
+          all(current %in% choices)
+        ) {
+          # 1) Keep user's current selection if still valid
+          selected_choices <- current
+
+        } else if (!is.null(selected)) {
+          # 2) Use user-specified 'selected' argument (formatted if needed)
+          selected_choices <- if (!is.null(fun)) fun(selected) else selected
+
+        } else {
+          # 3) Default to full range of choices
+          selected_choices <- c(choices[1L], choices[length(choices)])
+        }
+
+        # Update slider on the UI
         shinyWidgets::updateSliderTextInput(
           session,
           inputId = "sliderPeriod",
           choices = choices,
-          # selected = selected
-          selected = if (is.null(selected)) c(min(choices), max(choices)) else selected
+          selected = selected_choices
         )
-      })
+      }, ignoreInit = FALSE)
+
+      # ------------------------------------------------------------------------------
+      # Reactive value for returning processed slider output
+      # ------------------------------------------------------------------------------
+
       sliderPeriod <- shiny::reactive({
-        shiny::validate(shiny::need(input$sliderPeriod, message = FALSE))
+        shiny::req(input$sliderPeriod)
+
+        # Apply inverse formatting (string → Date)
         if (!is.null(invfun)) {
           invfun(input$sliderPeriod)
         } else {
           input$sliderPeriod
         }
       })
-      return(sliderPeriod)
+
+      # Return reactive
+      sliderPeriod
     }
   )
 }
