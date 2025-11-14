@@ -1,4 +1,4 @@
-test_shiny <- function(output_id, expr, title, dialog_name,
+test_shiny <- function(output_id = "", expr, title = NULL, dialog_name,
                        width = "100%", height = "500px",
                        viewer_width = 1200, viewer_height = 500) {
   if (missing(dialog_name))
@@ -12,7 +12,7 @@ test_shiny <- function(output_id, expr, title, dialog_name,
         eval(expr)
       })
     }, viewer = shiny::dialogViewer(
-      title, width = viewer_width, height = viewer_height
+      dialogName = dialog_name, width = viewer_width, height = viewer_height
     )
   )
 }
