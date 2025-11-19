@@ -42,9 +42,10 @@ sliderPeriodUI <- function(id, label = "Period", choices = c(0, 1),
 #' @export
 sliderPeriodServer <- function(
     id, choices,
-    fun = function(x) format(x, "%y-%m"),
-    invfun = function(x) as.Date(paste0(x, "-01"), "%y-%m-%d"),
-    selected = NULL, reverse = FALSE
+    fun      = function(x) format(x, "%y-%m"),
+    invfun   = function(x) as.Date(paste0(x, "-01"), "%y-%m-%d"),
+    selected = NULL,
+    reverse  = FALSE
   ) {
   shiny::moduleServer(
     id,
@@ -52,21 +53,48 @@ sliderPeriodServer <- function(
       ns <- session$ns
 
       shiny::observe({
+
+        # make a local copy to avoid mutating original values
+        vals <- choices
+
+        # reverse the choices if needed
         if (reverse)
-          choices <- rev(choices)
+          vals <- rev(vals)
+
+        # apply formatting function (e.g. "%y-%m")
         if (!is.null(fun))
-          choices <- fun(choices)
+          vals <- fun(vals)
+
+        # if "selected" was not provided, default to full range
+        target <- if (is.null(selected)) {
+          c(min(vals), max(vals))
+        } else {
+          selected
+        }
+
+        # isolate() prevent triggering reactivity during comparison
+        current <- shiny::isolate(input$sliderPeriod)
+
+        # if the current slider value is already equal to what we
+        # intend to set, skip updateSliderTextInput() completely.
+        # This prevents UI "blinking" or re-drawing on initial load.
+        if (!is.null(current) && length(current) == length(target) &&
+            all(current == target)) {
+          return(NULL)
+        }
+
+        # perform update only when necessary.
         shinyWidgets::updateSliderTextInput(
           session,
-          inputId = "sliderPeriod",
-          choices = choices,
-          # selected = selected
-          selected = if (is.null(selected)) c(min(choices), max(choices)) else selected
+          inputId  = "sliderPeriod",
+          choices  = vals,
+          selected = target
         )
       })
 
+      # reactive conversion (ui -> date objects)
       sliderPeriod <- shiny::reactive({
-        shiny::validate(shiny::need(input$sliderPeriod, message = FALSE))
+        shiny::req(input$sliderPeriod)
         if (!is.null(invfun)) {
           invfun(input$sliderPeriod)
         } else {
