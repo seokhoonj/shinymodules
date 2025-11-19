@@ -62,14 +62,17 @@ sliderPeriodServer <- function(
           vals <- rev(vals)
 
         # apply formatting function (e.g. "%y-%m")
-        if (!is.null(fun))
-          vals <- fun(vals)
+        # always ensure character type for sliderTextInput
+        disp <- if (!is.null(fun)) fun(vals) else as.character(vals)
 
-        # if "selected" was not provided, default to full range
+        # determine target selection on the *display* scale
+        # - if "selected" is not provided, assume it's in the same raw scale as
+        #   "choices" and apply "fun" so that it matches "disp"
+        # - otherwise, default to the full range
         target <- if (is.null(selected)) {
-          c(min(vals), max(vals))
+          c(min(disp), max(disp))
         } else {
-          selected
+          if (!is.null(fun)) fun(selected) else as.character(selected)
         }
 
         # isolate() prevent triggering reactivity during comparison
@@ -77,7 +80,7 @@ sliderPeriodServer <- function(
 
         # if the current slider value is already equal to what we
         # intend to set, skip updateSliderTextInput() completely.
-        # This prevents UI "blinking" or re-drawing on initial load.
+        # this prevents the selection range from "jumping" on initial load.
         if (!is.null(current) && length(current) == length(target) &&
             all(current == target)) {
           return(NULL)
@@ -87,7 +90,7 @@ sliderPeriodServer <- function(
         shinyWidgets::updateSliderTextInput(
           session,
           inputId  = "sliderPeriod",
-          choices  = vals,
+          choices  = disp,
           selected = target
         )
       })
@@ -154,7 +157,7 @@ dynSliderPeriodServer <- function(
           vals <- rev(vals)
 
         # Apply user-provided formatting function
-        choices <- if (!is.null(fun)) fun(vals) else vals
+        choices <- if (!is.null(fun)) fun(vals) else as.character(vals)
 
         # Current selected values already shown in the slider
         current <- shiny::isolate(input$sliderPeriod)
@@ -172,7 +175,7 @@ dynSliderPeriodServer <- function(
 
         } else if (!is.null(selected)) {
           # 2) Use user-specified 'selected' argument (formatted if needed)
-          selected_choices <- if (!is.null(fun)) fun(selected) else selected
+          selected_choices <- if (!is.null(fun)) fun(selected) else as.character(selected)
 
         } else {
           # 3) Default to full range of choices
